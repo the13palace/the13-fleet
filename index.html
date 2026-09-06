@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0b0d" />
+  <title>The 13 Palace Fleet</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app">
+    <section id="loginView" class="view active">
+      <div class="login-shell">
+        <div class="brand-mark">13</div>
+        <div class="eyebrow">THE 13 PALACE</div>
+        <h1>Fleet Control Centre</h1>
+        <p class="muted">Internal Operations</p>
+
+        <form id="loginForm" class="card login-card">
+          <label>Email</label>
+          <input id="email" type="email" autocomplete="username" required />
+
+          <label>Password</label>
+          <input id="password" type="password" autocomplete="current-password" required />
+
+          <button class="btn primary" type="submit">Sign In</button>
+          <div id="loginMessage" class="message"></div>
+        </form>
+      </div>
+    </section>
+
+    <section id="mainView" class="view">
+      <header class="topbar">
+        <div>
+          <div class="eyebrow">THE 13 PALACE</div>
+          <div class="top-title">Fleet Control Centre</div>
+        </div>
+        <div class="top-actions">
+          <span id="userBadge" class="badge"></span>
+          <button id="logoutBtn" class="btn ghost">Logout</button>
+        </div>
+      </header>
+
+      <nav class="tabs">
+        <button class="tab active" data-page="dashboard">Dashboard</button>
+        <button class="tab" data-page="trips">Today</button>
+        <button class="tab" data-page="booking">New Booking</button>
+        <button class="tab" data-page="fleet">Fleet</button>
+      </nav>
+
+      <main class="content">
+        <section id="page-dashboard" class="page active">
+          <div class="hero-grid">
+            <div class="stat-card"><span>Pending</span><strong id="statPending">—</strong></div>
+            <div class="stat-card"><span>Assigned</span><strong id="statAssigned">—</strong></div>
+            <div class="stat-card"><span>On Trip</span><strong id="statOnTrip">—</strong></div>
+            <div class="stat-card"><span>Available Cars</span><strong id="statAvailable">—</strong></div>
+          </div>
+
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">LIVE OPERATIONS</div>
+              <h2>Priority Trips</h2>
+            </div>
+            <button class="btn ghost" id="refreshBtn">Refresh</button>
+          </div>
+          <div id="priorityTrips" class="stack"></div>
+        </section>
+
+        <section id="page-trips" class="page">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">TODAY</div>
+              <h2>Trip Board</h2>
+            </div>
+          </div>
+          <div id="tripBoard" class="stack"></div>
+        </section>
+
+        <section id="page-booking" class="page">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">CONCIERGE / BUTLER</div>
+              <h2>New Booking</h2>
+            </div>
+          </div>
+
+          <form id="bookingForm" class="card form-grid">
+            <div>
+              <label>Guest Name</label>
+              <input id="guestName" required />
+            </div>
+
+            <div>
+              <label>Room No.</label>
+              <input id="roomNo" />
+            </div>
+
+            <div>
+              <label>Guest Count</label>
+              <input id="guestCount" type="number" min="1" value="1" required />
+            </div>
+
+            <div>
+              <label>Luggage</label>
+              <input id="luggageCount" type="number" min="0" value="0" />
+            </div>
+
+            <div>
+              <label>VIP Level</label>
+              <select id="vipLevel">
+                <option>STANDARD</option>
+                <option>VIP</option>
+                <option>VVIP</option>
+                <option>CHAIRMAN</option>
+              </select>
+            </div>
+
+            <div>
+              <label>Vehicle Type</label>
+              <select id="vehicleType">
+                <option value="">Auto</option>
+                <option>LIMO</option>
+                <option>MPV</option>
+                <option>MINIBUS</option>
+                <option>LOGISTICS</option>
+              </select>
+            </div>
+
+            <div class="full">
+              <label>Pickup Time</label>
+              <input id="pickupTime" type="datetime-local" required />
+            </div>
+
+            <div class="full">
+              <label>Pickup Location</label>
+              <input id="pickupLocation" required placeholder="e.g. The 13 Palace" />
+            </div>
+
+            <div class="full">
+              <label>Destination</label>
+              <input id="destination" required placeholder="e.g. Macau International Airport" />
+            </div>
+
+            <div class="full">
+              <label>Special Request</label>
+              <textarea id="specialRequest" rows="3"></textarea>
+            </div>
+
+            <div class="full">
+              <button class="btn primary" type="submit">Create Booking</button>
+              <div id="bookingMessage" class="message"></div>
+            </div>
+          </form>
+        </section>
+
+        <section id="page-fleet" class="page">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">FLEET STATUS</div>
+              <h2>Vehicles & Drivers</h2>
+            </div>
+          </div>
+          <div id="fleetBoard" class="stack"></div>
+        </section>
+      </main>
+    </section>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
